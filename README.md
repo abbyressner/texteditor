@@ -78,7 +78,7 @@ Date:   Thu Feb 13 12:39:53 2025 -0600
 Relevant inputs: the character to be added to the buffer \
 Critical operations:
 - inserting the character
-- increasing cursor position
-- increasing size
-Mathematical model for insert: T(n) = n
-Big-O for insert: O(1)
+- advancing the cursor
+- increasing the size
+Mathematical model of `insert` runtime: T(n) = 1 \
+`insert` is O(1)
