@@ -5,18 +5,16 @@ package edu.grinnell.csc207.texteditor;
  */
 public class GapBuffer {
 
-    private int sz, cursor, gapStart, gapEnd;
+    private int gapStart, gapEnd;
     private char[] buffer;
 
     /**
      * Constructs a new GapBuffer with an empty buffer.
      *
      * @param sz the size of the buffer
-     * @param cursor the current cursor position in the buffer
      * @param buffer the buffer character array
      */
     public GapBuffer() {
-        cursor = 0;
         buffer = new char[10];
         gapStart = 0;
         gapEnd = buffer.length;
@@ -31,24 +29,24 @@ public class GapBuffer {
         if (gapStart == gapEnd) {
             expandBuffer();
         }
-        gapStart++;
         buffer[gapStart] = ch;
+        gapStart++;
     }
 
     /**
      * Expands the buffer size when the gap is filled.
      */
     public void expandBuffer() {
-        sz = buffer.length;
-        char[] newBuffer = new char[sz * 2];
+        char[] newBuffer = new char[buffer.length * 2];
         for (int i = 0; i < gapStart; i++) {
             newBuffer[i] = buffer[i];
         }
-        for (int i = gapEnd; i < sz; i++) {
-            newBuffer[i + sz] = buffer[i];
+        int afterGap = buffer.length - gapEnd;
+        int newGapEnd = (buffer.length * 2) - afterGap;
+        for (int i = gapEnd; i < buffer.length; i++) {
+            newBuffer[newGapEnd + (i - gapEnd)] = buffer[i];
         }
-        sz = newBuffer.length;
-        gapEnd += sz;
+        gapEnd = newGapEnd;
         buffer = newBuffer;
     }
 
@@ -56,10 +54,9 @@ public class GapBuffer {
      * Deletes the character at the current cursor position.
      */
     public void delete() {
-        if (getSize() == 0) {
-            return;
+        if (gapStart > 0) {
+            gapStart--;
         }
-        gapStart--;
     }
 
     /**
@@ -68,15 +65,17 @@ public class GapBuffer {
      * @return int cursor
      */
     public int getCursorPosition() {
-        return cursor;
+        return gapStart;
     }
 
     /**
      * Moves the cursor one position to the left, if possible.
      */
     public void moveLeft() {
-        if (cursor > 0) {
-            cursor--;
+        if (gapStart > 0) {
+            buffer[gapEnd - 1] = buffer[gapStart - 1];
+            gapStart--;
+            gapEnd--;
         }
     }
 
@@ -84,8 +83,10 @@ public class GapBuffer {
      * Moves the cursor one position to the right, if possible.
      */
     public void moveRight() {
-        if (cursor < sz) {
-            cursor++;
+        if (gapEnd < buffer.length) {
+            buffer[gapStart] = buffer[gapEnd];
+            gapStart++;
+            gapEnd++;
         }
     }
 
@@ -95,28 +96,39 @@ public class GapBuffer {
      * @return int sz
      */
     public int getSize() {
-        return buffer.length;
+        return gapStart + (buffer.length - gapEnd);
     }
 
     /**
      * Returns the character at the specified index.
      *
      * @param i the index of the character
-     * @return char the character at the index
+     * @return the character at index `i`
      */
     public char getChar(int i) {
-        return buffer[i];
+        if (i < gapStart) {
+            return buffer[i];
+        } else {
+            return buffer[i + (gapEnd - gapStart)];
+        }
     }
 
     /**
      * Returns the buffer as a string.
      *
-     * @return String the buffer as a string
+     * @return the buffer as a string
      */
     public String toString() {
         String s = "";
-        for (int i = 0; i < buffer.length; i++) {
-            s += buffer[i];
+        if (gapStart > 0) {
+            for (int i = 0; i < gapStart; i++) {
+                s += buffer[i];
+            }
+        }
+        if (gapEnd < buffer.length) {
+            for (int i = gapEnd; i < buffer.length; i++) {
+                s += buffer[i];
+            }
         }
         return s;
     }
