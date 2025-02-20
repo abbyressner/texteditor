@@ -73,3 +73,12 @@ Date:   Thu Feb 13 12:39:53 2025 -0600
 
     initial commit
 (END)
+
+### SimpleStringBuffer analysis
+Relevant inputs: the character to be added to the buffer \
+Critical operations:
+- inserting the character
+- increasing cursor position
+- increasing size
+Mathematical model for insert: T(n) = n
+Big-O for insert: O(1)
