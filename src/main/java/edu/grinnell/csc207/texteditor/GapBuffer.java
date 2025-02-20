@@ -22,6 +22,11 @@ public class GapBuffer {
         gapEnd = buffer.length;
     }
 
+    /**
+     * Inserts a character at the current cursor position.
+     *
+     * @param ch the character to insert
+     */
     public void insert(char ch) {
         if (gapStart == gapEnd) {
             expandBuffer();
@@ -30,6 +35,9 @@ public class GapBuffer {
         buffer[gapStart] = ch;
     }
 
+    /**
+     * Expands the buffer size when the gap is filled.
+     */
     public void expandBuffer() {
         sz = buffer.length;
         char[] newBuffer = new char[sz * 2];
@@ -44,6 +52,9 @@ public class GapBuffer {
         buffer = newBuffer;
     }
 
+    /**
+     * Deletes the character at the current cursor position.
+     */
     public void delete() {
         if (getSize() == 0) {
             return;
@@ -51,30 +62,57 @@ public class GapBuffer {
         gapStart--;
     }
 
+    /**
+     * Returns the current cursor position in the buffer.
+     *
+     * @return int cursor
+     */
     public int getCursorPosition() {
         return cursor;
     }
 
+    /**
+     * Moves the cursor one position to the left, if possible.
+     */
     public void moveLeft() {
         if (cursor > 0) {
             cursor--;
         }
     }
 
+    /**
+     * Moves the cursor one position to the right, if possible.
+     */
     public void moveRight() {
         if (cursor < sz) {
             cursor++;
         }
     }
 
+    /**
+     * Returns the size of the buffer.
+     *
+     * @return int sz
+     */
     public int getSize() {
         return buffer.length;
     }
 
+    /**
+     * Returns the character at the specified index.
+     *
+     * @param i the index of the character
+     * @return char the character at the index
+     */
     public char getChar(int i) {
         return buffer[i];
     }
 
+    /**
+     * Returns the buffer as a string.
+     *
+     * @return String the buffer as a string
+     */
     public String toString() {
         String s = "";
         for (int i = 0; i < buffer.length; i++) {
