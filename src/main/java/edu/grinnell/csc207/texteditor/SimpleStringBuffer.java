@@ -5,15 +5,14 @@ package edu.grinnell.csc207.texteditor;
  */
 public class SimpleStringBuffer {
 
-    private int sz, cursor;
+    private int sz;
+
+    private int cursor;
+    
     private String buffer;
 
     /**
      * Constructs a new SimpleStringBuffer with an empty buffer.
-     *
-     * @param sz the size of the buffer
-     * @param cursor the current cursor position in the buffer
-     * @param buffer the string buffer
      */
     public SimpleStringBuffer() {
         sz = 0;

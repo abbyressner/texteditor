@@ -5,14 +5,14 @@ package edu.grinnell.csc207.texteditor;
  */
 public class GapBuffer {
 
-    private int gapStart, gapEnd;
+    private int gapStart;
+
+    private int gapEnd;
+
     private char[] buffer;
 
     /**
      * Constructs a new GapBuffer with an empty buffer.
-     *
-     * @param sz the size of the buffer
-     * @param buffer the buffer character array
      */
     public GapBuffer() {
         buffer = new char[10];
