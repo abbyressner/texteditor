@@ -78,10 +78,10 @@ public class TextEditor {
         screen.clear();
         String text = buf.toString();
         for (int i = 0; i < text.length(); i++) {
-            screen.setCharacter(0, i, TextCharacter.fromCharacter(text.charAt(i))[0]);
+            screen.setCharacter(i, 0, TextCharacter.fromCharacter(text.charAt(i))[0]);
         }
         int cursorPos = buf.getCursorPosition();
-        screen.setCursorPosition(new TerminalPosition(0, cursorPos));
+        screen.setCursorPosition(new TerminalPosition(cursorPos, 0));
         screen.refresh();
     }
 }
