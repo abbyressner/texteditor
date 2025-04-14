@@ -52,7 +52,7 @@ public class GapBuffer {
      * Deletes the character at the current cursor position.
      */
     public void delete() {
-        if (gapStart > 0) {
+        if (gapStart != 0) {
             gapStart--;
         }
     }
