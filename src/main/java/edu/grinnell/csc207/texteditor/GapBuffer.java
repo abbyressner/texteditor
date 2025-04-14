@@ -38,9 +38,7 @@ public class GapBuffer {
      */
     public void expandBuffer() {
         char[] newBuffer = new char[buffer.length * 2];
-        for (int i = 0; i < gapStart; i++) {
-            newBuffer[i] = buffer[i];
-        }
+        System.arraycopy(buffer, 0, newBuffer, 0, gapStart);
         int afterGap = buffer.length - gapEnd;
         int newGapEnd = (buffer.length * 2) - afterGap;
         for (int i = gapEnd; i < buffer.length; i++) {
