@@ -1,5 +1,15 @@
 # CSC 207: Text Editor
 
+<!-- 
+For an M : You need to give a reasoning for the runtime of insert in addition to 
+just the runtime itself. Your texteditor needs to pass all autograder tests. You 
+should be able to pass these tests by ensuring that "delete" deletes the character 
+1 index to the left of the current cursor position.   
+
+
+
+ -->
+
 **Author**: Abigail Ressner
 
 ## Resources Used
@@ -73,6 +83,15 @@ Date:   Thu Feb 13 12:39:53 2025 -0600
 
     initial commit
 (END)
+
+### SimpleStringBuffer analysis
+Relevant inputs: the character to be added to the buffer \
+Critical operations:
+- inserting the character
+- advancing the cursor
+- increasing the size
+Mathematical model of `insert` runtime: T(n) = 1 \
+`insert` is O(1)
 
 ### SimpleStringBuffer analysis
 Relevant inputs: the character to be added to the buffer \
