@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -75,13 +76,43 @@ public class TextEditor {
      * @throws IOException
      */
     private static void drawBuffer(GapBuffer buf, Screen screen) throws IOException {
-        screen.clear();
+        TerminalSize ts = screen.getTerminalSize();
+        int maxCols = ts.getColumns();
         String text = buf.toString();
+        int row = 0;
+        int col = 0;
+        screen.clear();
         for (int i = 0; i < text.length(); i++) {
-            screen.setCharacter(i, 0, TextCharacter.fromCharacter(text.charAt(i))[0]);
+            char ch = text.charAt(i);
+            if (ch == '\n') {
+                row++;
+                col = 0;
+            } else {
+                if (col >= maxCols) {
+                    row++;
+                    col = 0;
+                }
+                screen.setCharacter(col, row, TextCharacter.fromCharacter(ch)[0]);
+                col++;
+            }
         }
         int cursorPos = buf.getCursorPosition();
-        screen.setCursorPosition(new TerminalPosition(cursorPos, 0));
+        int curRow = 0;
+        int curCol = 0;
+        for (int i = 0; i < cursorPos; i++) {
+            char ch = text.charAt(i);
+            if (ch == '\n') {
+                curRow++;
+                curCol = 0;
+            } else {
+                if (curCol >= maxCols) {
+                    curRow++;
+                    curCol = 0;
+                }
+                curCol++;
+            }
+        }
+        screen.setCursorPosition(new TerminalPosition(curCol, curRow));
         screen.refresh();
     }
 }
