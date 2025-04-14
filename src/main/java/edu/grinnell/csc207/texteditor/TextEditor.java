@@ -53,6 +53,8 @@ public class TextEditor {
             KeyType key = stroke.getKeyType();
             if (key == KeyType.Character) {
                 buf.insert(stroke.getCharacter());
+            } else if (key == KeyType.Enter) {
+                buf.insert('\n');
             } else if (key == KeyType.Backspace) {
                 buf.delete();
             } else if (key == KeyType.ArrowLeft) {
