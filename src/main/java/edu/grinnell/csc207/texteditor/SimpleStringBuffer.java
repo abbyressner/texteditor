@@ -8,7 +8,7 @@ public class SimpleStringBuffer {
     private int sz;
 
     private int cursor;
-    
+
     private String buffer;
 
     /**
@@ -35,17 +35,12 @@ public class SimpleStringBuffer {
      * Deletes the character at the current cursor position.
      */
     public void delete() {
-        if (sz == 0) {
+        if (cursor == 0) {
             return;
-        } else if (cursor == sz) {
-            buffer = buffer.substring(0, cursor - 1);
-            cursor--;
-            sz--;
-        } else {
-            buffer = buffer.substring(0, cursor) + buffer.substring(cursor + 1);
-            cursor--;
-            sz--;
         }
+        buffer = buffer.substring(0, cursor - 1) + buffer.substring(cursor);
+        cursor--;
+        sz--;
     }
 
     /**
