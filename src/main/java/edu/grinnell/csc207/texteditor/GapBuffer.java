@@ -116,6 +116,7 @@ public class GapBuffer {
      *
      * @return the buffer as a string
      */
+    @Override
     public String toString() {
         String s = "";
         if (gapStart > 0) {
