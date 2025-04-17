@@ -4,7 +4,7 @@
 
 ## Revision Log
 
-### Grader comments
+### Grader comments (for context)
 
 "For an M : You **need to give a reasoning for the runtime of insert** in addition to just the runtime itself.  Your texteditor **needs to pass all autograder tests**. You should be able to pass these tests by ensuring that "delete" deletes the character 1 index to the left of the current cursor position.\
 For an E: your texteditor is currently entering 1 character per line. Each entry of a character results in a newline, *while it should all remain on the same line*  You need to **fix your style errors** - unused @param tags for sz, buffer in GapBuffer and unused @param tags for sz, cursor, buffer in SimpleStringBuffer. You can use "mvn checkstyle:check" to see your style errors."
