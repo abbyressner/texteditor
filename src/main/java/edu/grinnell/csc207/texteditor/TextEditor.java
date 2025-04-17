@@ -51,18 +51,29 @@ public class TextEditor {
             drawBuffer(buf, screen);
             KeyStroke stroke = screen.readInput();
             KeyType key = stroke.getKeyType();
-            if (key == KeyType.Character) {
-                buf.insert(stroke.getCharacter());
-            } else if (key == KeyType.Enter) {
-                buf.insert('\n');
-            } else if (key == KeyType.Backspace) {
-                buf.delete();
-            } else if (key == KeyType.ArrowLeft) {
-                buf.moveLeft();
-            } else if (key == KeyType.ArrowRight) {
-                buf.moveRight();
-            } else if (key == KeyType.Escape) {
-                isRunning = false;
+            if (null != key) {
+                switch (key) {
+                    case Character:
+                        buf.insert(stroke.getCharacter());
+                        break;
+                    case Enter: // not required, just for fun
+                        buf.insert('\n');
+                        break;
+                    case Backspace:
+                        buf.delete();
+                        break;
+                    case ArrowLeft:
+                        buf.moveLeft();
+                        break;
+                    case ArrowRight:
+                        buf.moveRight();
+                        break;
+                    case Escape:
+                        isRunning = false;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
